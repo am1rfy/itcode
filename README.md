@@ -1,4 +1,6 @@
-# itcode
+# ITCODE training project
+
+> Contact: https://t.me/am1rfy
 
 ## Project setup
 ```
