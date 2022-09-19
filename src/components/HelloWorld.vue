@@ -27,6 +27,7 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <button v-on:click="this.wow">{{ testBtn }}</button>
   </div>
 </template>
 
@@ -34,12 +35,17 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
+    testBtn: String
+  },
+  methods: {
+    wow: () => {
+      alert('wow! you were able to')
+    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
@@ -54,5 +60,19 @@ li {
 }
 a {
   color: #42b983;
+}
+button {
+  padding: 15px 20px;
+
+  margin: 10px;
+  cursor: pointer;
+
+  background-color: white;
+
+  border: 2px solid #42b983;
+  border-radius: 14px;
+}
+button:hover {
+  background-color: #bdefd4;
 }
 </style>
