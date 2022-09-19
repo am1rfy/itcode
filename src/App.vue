@@ -1,15 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <WowInstance nameBtn="click me"/>
+  </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import WowInstance from './components/Wow.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    WowInstance
   }
 }
 </script>
