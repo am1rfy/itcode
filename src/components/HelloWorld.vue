@@ -27,7 +27,6 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
-    <button v-on:click="this.wow">{{ testBtn }}</button>
   </div>
 </template>
 
@@ -35,8 +34,7 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String,
-    testBtn: String
+    msg: String
   },
   methods: {
     wow: () => {
@@ -60,19 +58,5 @@ li {
 }
 a {
   color: #42b983;
-}
-button {
-  padding: 15px 20px;
-
-  margin: 10px;
-  cursor: pointer;
-
-  background-color: white;
-
-  border: 2px solid #42b983;
-  border-radius: 14px;
-}
-button:hover {
-  background-color: #bdefd4;
 }
 </style>
