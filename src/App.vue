@@ -19,7 +19,5 @@ export default {
 </script>
 
 <style>
-  body {
-    border-color: var(--bs-body-color);
-  }
+
 </style>
