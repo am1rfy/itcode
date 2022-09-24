@@ -1,31 +1,28 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <WowInstance nameBtn="click me"/>
-  </div>
+    <HeaderComponent/>
+    <div class="main-container">
+      <LabelsBar/>
+      <CardsContainer/>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import WowInstance from './components/Wow.vue'
+import HeaderComponent from './components/HeaderComponent.vue'
+import LabelsBar from './components/LabelsBar.vue'
+import CardsContainer from './components/CardsContainer.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    WowInstance
+    HeaderComponent,
+    LabelsBar,
+    CardsContainer
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .main-container {
+    margin-top: 16px;
+  }
 </style>
