@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
   .navbar {
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px var(--bs-gray-600);
   }
   .container-fluid > *{
     margin: 10px 0 10px 0;

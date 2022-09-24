@@ -23,14 +23,18 @@ export default {
 
 <style scoped>
   .side-bar {
-    padding: 10px;
-    width: 22.5%;
+    padding: 0 10px 0 10px;
+    width: 22.6%;
+
+    float: left;
   }
   .list-group-item {
     padding: 25px;
     border: none;
+
     background-color: var(--bs-body-color);
     color: white;
+
     font-weight: bolder;
     cursor: pointer;
   }
