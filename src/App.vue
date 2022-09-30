@@ -1,8 +1,8 @@
 <template>
     <HeaderComponent/>
     <div class="main-container">
-      <LabelsBar/>
-      <CardsContainer/>
+      <LabelsBar @selectedLabelChanged="selectedLabelChanged"/>
+      <CardsContainer :active-cards-ids="activeCardsIds"/>
     </div>
 </template>
 
@@ -17,6 +17,16 @@ export default {
     HeaderComponent,
     LabelsBar,
     CardsContainer
+  },
+  data() {
+    return {
+      activeCardsIds: [],
+    }
+  },
+  methods: {
+    selectedLabelChanged(cardsIds) {
+      this.activeCardsIds = cardsIds
+    }
   }
 }
 </script>

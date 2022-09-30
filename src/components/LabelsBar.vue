@@ -18,18 +18,23 @@ export default {
   data() {
     return {
       labels: [
-        {id: 1, title: 'Label1', isSelected: true},
-        {id: 2, title: 'Label2', isSelected: false},
-        {id: 3, title: 'Label3', isSelected: false},
-        {id: 4, title: 'Label4', isSelected: false},
-        {id: 5, title: 'Label5', isSelected: false},
+        {id: 1, title: 'Label1', cardsIds: [1, 2], isSelected: true},
+        {id: 2, title: 'Label2', cardsIds: [4], isSelected: false},
+        {id: 3, title: 'Label3', cardsIds: [], isSelected: false},
+        {id: 4, title: 'Label4', cardsIds: [3], isSelected: false},
+        {id: 5, title: 'Label5', cardsIds: [], isSelected: false},
       ]
     }
   },
   methods: {
     select(e) {
       this.labels.forEach(label => {
-        label.id == e.target.id ? label.isSelected = true : label.isSelected = false
+        if (String(label.id) === e.target.id) {
+          label.isSelected = true
+          this.$emit('selectedLabelChanged', label.cardsIds)
+        } else {
+          label.isSelected = false
+        }
       })
     }
   }

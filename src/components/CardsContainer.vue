@@ -1,6 +1,6 @@
 <template>
   <div class="cards-container">
-    <div class="card bg-dark" v-for="card in cards" :key="card.id">
+    <div class="card bg-dark" v-for="card in activeCards" :key="card.id">
       <div class="card-header">
         <h6>{{card.path}}</h6>
         <h6>{{card.date}}</h6>
@@ -17,6 +17,19 @@
 <script>
 export default {
   name: "NotesContainer",
+  props: {
+    activeCardsIds: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
+  computed: {
+    activeCards() {
+      return this.cards.filter(card => this.activeCardsIds.includes(card.id))
+    }
+  },
   data() {
     return {
       cards: [
