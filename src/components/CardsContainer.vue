@@ -1,34 +1,10 @@
 <template>
   <div class="cards-container">
-    <div class="card bg-dark">
-      <h6 class="card-header">Path</h6>
+    <div class="card bg-dark" v-for="card in cards" :key="card.key">
+      <h6 class="card-header"> {{card.path}} </h6>
       <div class="card-body">
-        <h5 class="card-title">Title</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a href="#" class="btn btn-outline-warning">Check out</a>
-      </div>
-    </div>
-    <div class="card bg-dark">
-      <h6 class="card-header">Path</h6>
-      <div class="card-body">
-        <h5 class="card-title">Title</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a href="#" class="btn btn-outline-warning">Check out</a>
-      </div>
-    </div>
-    <div class="card bg-dark">
-      <h6 class="card-header">Path</h6>
-      <div class="card-body">
-        <h5 class="card-title">Title</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <a href="#" class="btn btn-outline-warning">Check out</a>
-      </div>
-    </div>
-    <div class="card bg-dark">
-      <h6 class="card-header">Path</h6>
-      <div class="card-body">
-        <h5 class="card-title">Title</h5>
-        <p class="card-text">Lorem ipsum</p>
+        <h5 class="card-title">{{card.title}}</h5>
+        <p class="card-text"> {{card.text}} </p>
         <a href="#" class="btn btn-outline-warning">Check out</a>
       </div>
     </div>
@@ -37,7 +13,37 @@
 
 <script>
 export default {
-  name: "NotesContainer"
+  name: "NotesContainer",
+  data() {
+    return {
+      cards: [
+        {
+          key: 1,
+          path: 'Path',
+          title: 'Title',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        },
+        {
+          key: 2,
+          path: 'Path',
+          title: 'Title',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          key: 3,
+          path: 'Path',
+          title: 'Title',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        },
+        {
+          key: 4,
+          path: 'Path',
+          title: 'Title',
+          text: 'Lorem ipsum'
+        },
+      ]
+    }
+  }
 }
 </script>
 
