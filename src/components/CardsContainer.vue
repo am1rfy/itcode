@@ -1,7 +1,10 @@
 <template>
   <div class="cards-container">
     <div class="card bg-dark" v-for="card in cards" :key="card.id">
-      <h6 class="card-header"> {{card.path}} </h6>
+      <div class="card-header">
+        <h6>{{card.path}}</h6>
+        <h6>{{card.date}}</h6>
+      </div>
       <div class="card-body">
         <h5 class="card-title">{{card.title}}</h5>
         <p class="card-text"> {{card.text}} </p>
@@ -68,7 +71,12 @@ export default {
     color: white;
   }
   .card > .card-header {
+    display: flex;
+    justify-content: space-between;
     border-color: var(--bs-gray-600);
     color: var(--bs-gray-600);
+  }
+  .card > .card-header > * {
+    margin: 0;
   }
 </style>
