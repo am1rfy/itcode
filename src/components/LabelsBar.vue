@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       labels: [
-        {id: 1, title: 'Label1', cardsIds: [1, 2], isSelected: true},
+        {id: 1, title: 'Label1', cardsIds: [1, 2], isSelected: false},
         {id: 2, title: 'Label2', cardsIds: [4], isSelected: false},
         {id: 3, title: 'Label3', cardsIds: [], isSelected: false},
         {id: 4, title: 'Label4', cardsIds: [3], isSelected: false},

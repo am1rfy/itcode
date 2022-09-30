@@ -1,16 +1,22 @@
 <template>
-  <div class="cards-container">
-    <div class="card bg-dark" v-for="card in activeCards" :key="card.id">
-      <div class="card-header">
-        <h6>{{card.path}}</h6>
-        <h6>{{card.date}}</h6>
+  <div class="cards-container"
+       :style="activeLabelIsEmpty">
+    <template v-if="this.activeCardsIds.length !== 0">
+      <div class="card bg-dark" v-for="card in activeCards" :key="card.id">
+        <div class="card-header">
+          <h6>{{card.path}}</h6>
+          <h6>{{card.date}}</h6>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{card.title}}</h5>
+          <p class="card-text"> {{card.text}} </p>
+          <a href="#" class="btn btn-outline-warning">Check out</a>
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">{{card.title}}</h5>
-        <p class="card-text"> {{card.text}} </p>
-        <a href="#" class="btn btn-outline-warning">Check out</a>
-      </div>
-    </div>
+    </template>
+    <template v-else>
+      <div class="label-empty">This label is now empty</div>
+    </template>
   </div>
 </template>
 
@@ -28,6 +34,9 @@ export default {
   computed: {
     activeCards() {
       return this.cards.filter(card => this.activeCardsIds.includes(card.id))
+    },
+    activeLabelIsEmpty() {
+      return this.activeCardsIds.length === 0 ? { justifyContent: 'center', textAlign: 'center' } : { justifyContent: 'initial', textAlign: 'initial' }
     }
   },
   data() {
@@ -91,5 +100,12 @@ export default {
   }
   .card > .card-header > * {
     margin: 0;
+  }
+  .label-empty {
+    color: var(--bs-gray-600);
+    font-weight: 400;
+    font-size: 1.375rem;
+    letter-spacing: 0;
+    line-height: 1.75rem;
   }
 </style>
