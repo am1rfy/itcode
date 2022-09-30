@@ -1,21 +1,41 @@
 <template>
   <div class="side-bar">
     <ul class="list-group">
-      <li class="list-group-item" v-on:click="notReady">Label1</li>
-      <li class="list-group-item" v-on:click="notReady">Label2</li>
-      <li class="list-group-item" v-on:click="notReady">Label3</li>
-      <li class="list-group-item" v-on:click="notReady">Label4</li>
-      <li class="list-group-item" v-on:click="notReady">Label5</li>
+      <li class="list-group-item"
+          :class="{selected: label.isSelected}"
+          @click="select"
+          v-for="label in labels"
+          :key="label.id"
+          :id="label.id">{{ label.title }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NavbarComponent',
+  name: 'LabelsComponent',
+  data() {
+    return {
+      labels: [
+        {id: 1, title: 'Label1', cardsIds: [1, 2], isSelected: false},
+        {id: 2, title: 'Label2', cardsIds: [4], isSelected: false},
+        {id: 3, title: 'Label3', cardsIds: [], isSelected: false},
+        {id: 4, title: 'Label4', cardsIds: [3], isSelected: false},
+        {id: 5, title: 'Label5', cardsIds: [], isSelected: false},
+      ]
+    }
+  },
   methods: {
-    notReady: () => {
-      alert('not ready')
+    select(e) {
+      this.labels.forEach(label => {
+        if (String(label.id) === e.target.id) {
+          label.isSelected = true
+          this.$emit('selectedLabelChanged', label.cardsIds)
+        } else {
+          label.isSelected = false
+        }
+      })
     }
   }
 }
@@ -40,6 +60,9 @@ export default {
   }
   .list-group-item:hover {
     background-color: var(--bs-gray-800);
+    /*color: var(--bs-warning);*/
+  }
+  .selected {
     color: var(--bs-warning);
   }
 </style>

@@ -1,43 +1,78 @@
 <template>
-  <div class="cards-container">
-    <div class="card bg-dark">
-      <h6 class="card-header">Path</h6>
-      <div class="card-body">
-        <h5 class="card-title">Title</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a href="#" class="btn btn-outline-warning">Check out</a>
+  <div class="cards-container"
+       :style="activeLabelIsEmpty">
+    <template v-if="this.activeCardsIds.length !== 0">
+      <div class="card bg-dark" v-for="card in activeCards" :key="card.id">
+        <div class="card-header">
+          <h6>{{card.path}}</h6>
+          <h6>{{card.date}}</h6>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{card.title}}</h5>
+          <p class="card-text"> {{card.text}} </p>
+          <a href="#" class="btn btn-outline-warning">Check out</a>
+        </div>
       </div>
-    </div>
-    <div class="card bg-dark">
-      <h6 class="card-header">Path</h6>
-      <div class="card-body">
-        <h5 class="card-title">Title</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a href="#" class="btn btn-outline-warning">Check out</a>
-      </div>
-    </div>
-    <div class="card bg-dark">
-      <h6 class="card-header">Path</h6>
-      <div class="card-body">
-        <h5 class="card-title">Title</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <a href="#" class="btn btn-outline-warning">Check out</a>
-      </div>
-    </div>
-    <div class="card bg-dark">
-      <h6 class="card-header">Path</h6>
-      <div class="card-body">
-        <h5 class="card-title">Title</h5>
-        <p class="card-text">Lorem ipsum</p>
-        <a href="#" class="btn btn-outline-warning">Check out</a>
-      </div>
-    </div>
+    </template>
+    <template v-else>
+      <div class="label-empty">This label is now empty</div>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
-  name: "NotesContainer"
+  name: "NotesContainer",
+  props: {
+    activeCardsIds: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
+  computed: {
+    activeCards() {
+      return this.cards.filter(card => this.activeCardsIds.includes(card.id))
+    },
+    activeLabelIsEmpty() {
+      return this.activeCardsIds.length === 0 ? { justifyContent: 'center', textAlign: 'center' } : { justifyContent: 'initial', textAlign: 'initial' }
+    }
+  },
+  data() {
+    return {
+      cards: [
+        {
+          id: 1,
+          path: 'Path',
+          title: 'Title',
+          date: '30.09.2022',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        },
+        {
+          id: 2,
+          path: 'Path',
+          title: 'Title',
+          date: '28.09.2022',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          id: 3,
+          path: 'Path',
+          title: 'Title',
+          date: '27.09.2022',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        },
+        {
+          id: 4,
+          path: 'Path',
+          title: 'Title',
+          date: '21.08.2022',
+          text: 'Lorem ipsum'
+        }
+      ]
+    }
+  },
 }
 </script>
 
@@ -58,7 +93,19 @@ export default {
     color: white;
   }
   .card > .card-header {
+    display: flex;
+    justify-content: space-between;
     border-color: var(--bs-gray-600);
     color: var(--bs-gray-600);
+  }
+  .card > .card-header > * {
+    margin: 0;
+  }
+  .label-empty {
+    color: var(--bs-gray-600);
+    font-weight: 400;
+    font-size: 1.375rem;
+    letter-spacing: 0;
+    line-height: 1.75rem;
   }
 </style>
