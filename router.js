@@ -4,7 +4,12 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: () => import('@/components/TodoPage')
+        component: () => import('@/views/TodoPage')
+    },
+    {
+        path: '/settings/',
+        name: 'Settings',
+        component: () => import ('@/views/SettingsPage')
     }
 ]
 

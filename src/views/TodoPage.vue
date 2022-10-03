@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import HeaderComponent from './HeaderComponent.vue'
-import LabelsContainer from './LabelsContainer/LabelsContainer.vue'
-import CardsContainer from './CardsContainer/CardsContainer.vue'
+import HeaderComponent from '../components/HeaderComponent.vue'
+import LabelsContainer from '../components/LabelsContainer/LabelsContainer.vue'
+import CardsContainer from '../components/CardsContainer/CardsContainer.vue'
 
 export default {
   name: 'TodoPage',
@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .main-container {
   margin-top: 16px;
 }
