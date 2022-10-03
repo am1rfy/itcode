@@ -2,12 +2,12 @@
   <div class="side-bar">
     <ul class="list-group">
       <li class="list-group-item"
-          :class="{selected: label.isSelected}"
-          @click="select"
           v-for="label in labels"
+          :class="{selected: label.isSelected}"
+          @click="select(label.id)"
           :key="label.id"
-          :id="label.id">{{ label.title }}
-      </li>
+          :id="label.id"
+      >{{ label.title }}</li>
     </ul>
   </div>
 </template>
@@ -23,13 +23,13 @@ export default {
         {id: 3, title: 'Label3', cardsIds: [], isSelected: false},
         {id: 4, title: 'Label4', cardsIds: [3], isSelected: false},
         {id: 5, title: 'Label5', cardsIds: [], isSelected: false},
-      ]
+      ],
     }
   },
   methods: {
-    select(e) {
+    select(id) {
       this.labels.forEach(label => {
-        if (String(label.id) === e.target.id) {
+        if (label.id === id) {
           label.isSelected = true
           this.$emit('selectedLabelChanged', label.cardsIds)
         } else {
@@ -37,6 +37,9 @@ export default {
         }
       })
     }
+  },
+  mounted() {
+    this.select(this.labels[0].id)
   }
 }
 </script>
