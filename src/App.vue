@@ -2,7 +2,7 @@
     <HeaderComponent/>
     <div class="main-container">
       <LabelsContainer @selectedLabelChanged="selectedLabelChanged"/>
-      <CardsContainer :active-cards-ids="activeCardsIds"/>
+      <CardsContainer :active-label-info="activeLabelInfo"/>
     </div>
 </template>
 
@@ -20,12 +20,16 @@ export default {
   },
   data() {
     return {
-      activeCardsIds: [],
+      activeLabelInfo: {
+        id: Number,
+        title: String,
+        cardsIds: Array
+      },
     }
   },
   methods: {
-    selectedLabelChanged(cardsIds) {
-      this.activeCardsIds = cardsIds
+    selectedLabelChanged(id, title, cardsIds) {
+      [this.activeLabelInfo.id, this.activeLabelInfo.title, this.activeLabelInfo.cardsIds] = [id, title, cardsIds]
     }
   }
 }

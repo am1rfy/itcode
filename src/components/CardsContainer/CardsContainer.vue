@@ -1,19 +1,15 @@
 <template>
   <div class="cards-container"
        :style="activeLabelIsEmpty">
-    <template v-if="activeCardsIds.length !== 0">
+    <template v-if="activeLabelInfo.cardsIds.length !== 0">
       <CardItem
         v-for="item in activeCards"
         :key="item.id"
-        :id="item.id"
-        :title="item.title"
-        :path="item.path"
-        :date="item.date"
-        :text="item.text"
+        :card="item"
       />
     </template>
     <template v-else>
-      <div class="label-empty">This label is now empty</div>
+      <div class="label-empty">"{{activeLabelInfo.title}}" is now empty</div>
     </template>
   </div>
 </template>
@@ -27,14 +23,18 @@ export default {
     CardItem
   },
   props: {
-    activeCardsIds: Array
+    activeLabelInfo: {
+      id: Number,
+      title: String,
+      cardsIds: Array
+    }
   },
   computed: {
     activeCards() {
-      return this.cards.filter(card => this.activeCardsIds.includes(card.id))
+      return this.cards.filter(card => this.activeLabelInfo.cardsIds.includes(card.id))
     },
     activeLabelIsEmpty() {
-      return this.activeCardsIds.length === 0 ? { justifyContent: 'center', textAlign: 'center' } : { justifyContent: 'initial', textAlign: 'initial' }
+      return this.activeLabelInfo.cardsIds.length === 0 ? { justifyContent: 'center', textAlign: 'center' } : { justifyContent: 'initial', textAlign: 'initial' }
     }
   },
   data() {

@@ -1,12 +1,12 @@
 <template>
   <div class="card bg-dark">
     <div class="card-header">
-      <h6>{{path}}</h6>
-      <h6>{{date}}</h6>
+      <h6>{{card.path}}</h6>
+      <h6>{{card.date}}</h6>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{title}}</h5>
-      <p class="card-text"> {{text}} </p>
+      <h5 class="card-title">{{card.title}}</h5>
+      <p class="card-text"> {{card.text}} </p>
       <a class="btn btn-outline-warning">Check out</a>
     </div>
   </div>
@@ -16,11 +16,13 @@
 export default {
   name: "CardItem",
   props: {
-    id: Number,
-    title: String,
-    path: String,
-    date: String,
-    text: String,
+    card: {
+      id: Number,
+      title: String,
+      path: String,
+      date: String,
+      text: String,
+    }
   }
 }
 </script>

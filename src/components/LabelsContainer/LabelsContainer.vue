@@ -38,14 +38,14 @@ export default {
       this.labels.forEach(item => {
         if (item.id === id) {
           item.isSelected = true
-          this.$emit('selectedLabelChanged', item.cardsIds)
+          this.$emit('selectedLabelChanged', item.id, item.title, item.cardsIds)
         } else {
           item.isSelected = false
         }
       })
     }
   },
-  mounted() {
+  created() {
     this.selectedLabelChanged(this.labels[0].id)
   }
 }
