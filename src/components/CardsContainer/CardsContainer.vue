@@ -1,18 +1,16 @@
 <template>
   <div class="cards-container"
        :style="activeLabelIsEmpty">
-    <template v-if="this.activeCardsIds.length !== 0">
-      <div class="card bg-dark" v-for="card in activeCards" :key="card.id">
-        <div class="card-header">
-          <h6>{{card.path}}</h6>
-          <h6>{{card.date}}</h6>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{card.title}}</h5>
-          <p class="card-text"> {{card.text}} </p>
-          <a href="#" class="btn btn-outline-warning">Check out</a>
-        </div>
-      </div>
+    <template v-if="activeCardsIds.length !== 0">
+      <CardItem
+        v-for="item in activeCards"
+        :key="item.id"
+        :id="item.id"
+        :title="item.title"
+        :path="item.path"
+        :date="item.date"
+        :text="item.text"
+      />
     </template>
     <template v-else>
       <div class="label-empty">This label is now empty</div>
@@ -21,15 +19,15 @@
 </template>
 
 <script>
+import CardItem from "@/components/CardsContainer/CardItem";
+
 export default {
   name: "NotesContainer",
+  components: {
+    CardItem
+  },
   props: {
-    activeCardsIds: {
-      type: Array,
-      default() {
-        return []
-      }
-    }
+    activeCardsIds: Array
   },
   computed: {
     activeCards() {
@@ -81,25 +79,6 @@ export default {
     margin-left: 5vh;
     display: flex;
     flex-wrap: wrap;
-  }
-  .card {
-    flex: 0 1 25%;
-    margin: 0 16px 16px 16px;
-
-    height: fit-content;
-    width: fit-content;
-
-    border-color: var(--bs-gray-600);
-    color: white;
-  }
-  .card > .card-header {
-    display: flex;
-    justify-content: space-between;
-    border-color: var(--bs-gray-600);
-    color: var(--bs-gray-600);
-  }
-  .card > .card-header > * {
-    margin: 0;
   }
   .label-empty {
     color: var(--bs-gray-600);

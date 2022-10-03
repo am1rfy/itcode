@@ -1,8 +1,6 @@
 <template>
   <li class="list-group-item"
       :class="{selected: isSelected}"
-      :key="id"
-      :id="id"
       @click="$emit('selectedLabelChanged', id)"
   >{{ title }}</li>
 </template>
