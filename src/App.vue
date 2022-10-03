@@ -1,21 +1,21 @@
 <template>
     <HeaderComponent/>
     <div class="main-container">
-      <LabelsBar @selectedLabelChanged="selectedLabelChanged"/>
+      <LabelsContainer @selectedLabelChanged="selectedLabelChanged"/>
       <CardsContainer :active-cards-ids="activeCardsIds"/>
     </div>
 </template>
 
 <script>
 import HeaderComponent from './components/HeaderComponent.vue'
-import LabelsBar from './components/LabelsBar.vue'
-import CardsContainer from './components/CardsContainer.vue'
+import LabelsContainer from './components/LabelsContainer/LabelsContainer.vue'
+import CardsContainer from './components/CardsContainer/CardsContainer.vue'
 
 export default {
   name: 'App',
   components: {
     HeaderComponent,
-    LabelsBar,
+    LabelsContainer,
     CardsContainer
   },
   data() {
