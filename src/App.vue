@@ -3,13 +3,8 @@
 </template>
 
 <script>
-import TodoPage from "@/components/TodoPage";
-
 export default {
-  name: 'App',
-  components: {
-    TodoPage
-  }
+  name: 'App'
 }
 </script>
 
