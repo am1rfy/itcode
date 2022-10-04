@@ -82,9 +82,13 @@ export default {
   }
   .label-empty {
     color: var(--bs-gray-600);
+
     font-weight: 400;
     font-size: 1.375rem;
+
     letter-spacing: 0;
     line-height: 1.75rem;
+
+    cursor: default;
   }
 </style>

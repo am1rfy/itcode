@@ -47,4 +47,9 @@ export default {
   .card > .card-header > * {
     margin: 0;
   }
+  .card-header,
+  .card-title,
+  .card-text {
+    cursor: default;
+  }
 </style>
