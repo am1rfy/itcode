@@ -1,7 +1,10 @@
 <template>
   <HeaderComponent/>
   <div class="main-container">
-    <LabelsContainer @selectedLabelChanged="selectedLabelChanged"/>
+    <LabelsContainer
+        @selectedLabelChanged="selectedLabelChanged"
+        :active-label-name="activeLabelName"
+    />
     <CardsContainer :active-label-info="activeLabelInfo"/>
   </div>
 </template>
@@ -17,6 +20,9 @@ export default {
     HeaderComponent,
     LabelsContainer,
     CardsContainer
+  },
+  props: {
+    activeLabelName: String
   },
   data() {
     return {

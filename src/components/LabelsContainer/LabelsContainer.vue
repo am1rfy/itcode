@@ -21,6 +21,9 @@ export default {
   components: {
     LabelItem
   },
+  props: {
+    activeLabelName: String
+  },
   data() {
     return {
       labels: [
@@ -39,6 +42,7 @@ export default {
         if (item.id === id) {
           item.isSelected = true
           this.$emit('selectedLabelChanged', item.id, item.title, item.cardsIds)
+          this.$router.push(`/label/${item.title}`)
         } else {
           item.isSelected = false
         }
@@ -47,6 +51,11 @@ export default {
   },
   created() {
     this.selectedLabelChanged(this.labels[0].id)
+    this.labels.forEach(item => {
+      if (this.activeLabelName && item.title.toLowerCase() === this.activeLabelName.toLowerCase()) {
+        this.selectedLabelChanged(item.id)
+      }
+    })
   }
 }
 </script>

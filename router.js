@@ -10,6 +10,14 @@ const routes = [
         component: () => import('@/views/TodoPage')
     },
     {
+        path: '/label/:activeLabelName',
+        meta: {
+            title: 'Notes'
+        },
+        component: () => import('@/views/TodoPage'),
+        props: true
+    },
+    {
         path: '/settings/',
         name: 'Settings',
         meta: {
