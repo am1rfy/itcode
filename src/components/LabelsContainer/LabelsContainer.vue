@@ -15,6 +15,7 @@
 
 <script>
 import LabelItem from './LabelItem'
+import { useLabelStore } from '@/stores/labelStore'
 
 export default {
   name: 'LabelsContainer',
@@ -26,14 +27,7 @@ export default {
   },
   data() {
     return {
-      labels: [
-        {id: 1, title: 'All', cardsIds: [1, 2, 3, 4, 5], isSelected: false},
-        {id: 2, title: 'Label1', cardsIds: [1, 2], isSelected: false},
-        {id: 3, title: 'Label2', cardsIds: [4], isSelected: false},
-        {id: 4, title: 'Label3', cardsIds: [], isSelected: false},
-        {id: 5, title: 'Label4', cardsIds: [3], isSelected: false},
-        {id: 6, title: 'Trash', cardsIds: [], isSelected: false},
-      ],
+      labels: useLabelStore().getItems.items
     }
   },
   methods: {

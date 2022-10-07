@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'LabelsBar',
+  name: 'HeaderComponent',
   methods: {
     notReady: () => {
       alert('not ready')
