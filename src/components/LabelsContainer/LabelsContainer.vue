@@ -15,7 +15,7 @@
 <script>
 import LabelItem from '@/components/LabelsContainer/LabelItem'
 import { useLabelStore } from '@/stores/labelStore'
-import { useNoteStore } from "@/stores/noteStore";
+import { useNoteStore } from "@/stores/noteStore"
 
 export default {
   name: 'LabelsContainer',
@@ -25,9 +25,9 @@ export default {
   props: {
     activeLabelName: String
   },
-  data: function () {
+  data() {
     return {
-      userLabels: useLabelStore().getItems,
+      labelStore: useLabelStore(),
       staticLabels: {
         all: {title: 'All', cardsIds: [], isSelected: false},
         trash: {title: 'Trash', cardsIds: [], isSelected: false},
@@ -36,6 +36,9 @@ export default {
     }
   },
   computed: {
+    userLabels() {
+      return this.labelStore.getItems
+    },
     labels() {
       return [this.staticLabels.all].concat(
           this.userLabels,
@@ -58,11 +61,16 @@ export default {
     }
   },
   created() {
-    // Загрузка записей в статичные ярлыки
+    // Загрузка id записей в статичные ярлыки
+    // todo Сделать так что id записей загружались при каждом изменении в ярлыках:
+    // todo добавлении новой записи, удалении, при отметке и пр
     useNoteStore().getItems.forEach(item => {
-      if (item.checked) this.staticLabels.checked.cardsIds.push(item.id)
-      else if (item.deleted) this.staticLabels.trash.cardsIds.push(item.id)
-      else this.staticLabels.all.cardsIds.push(item.id)
+      if (item.checked)
+        this.staticLabels.checked.cardsIds.push(item.id)
+      else if (item.deleted)
+        this.staticLabels.trash.cardsIds.push(item.id)
+      else
+        this.staticLabels.all.cardsIds.push(item.id)
     })
 
     // Выбранный по умолчанию ярлык при загрузке страницы

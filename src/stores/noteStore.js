@@ -39,5 +39,20 @@ export const useNoteStore = defineStore('notes', {
         getItems(state) {
             return state.items
         }
+    },
+    actions: {
+        createNote({title, text}) {
+            const newItemId = this.items[this.items.length - 1].id + 1
+            this.items.push({
+                id: newItemId,
+                title: title,
+                text: text,
+                checked: false,
+                deleted: false
+            })
+            // Здесь какая то логика взаимодействия с бэкэндом
+            console.log(this.items)
+            return newItemId
+        }
     }
 })

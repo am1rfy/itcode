@@ -1,5 +1,7 @@
 <template>
-  <HeaderComponent/>
+  <HeaderComponent
+    :active-label-name="activeLabelName"
+  />
   <div class="main-container">
     <LabelsContainer
         @selectedLabelChanged="selectedLabelChanged"
