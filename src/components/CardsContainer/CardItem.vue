@@ -1,13 +1,15 @@
 <template>
   <div class="card bg-dark">
     <div class="card-header">
-      <h6>{{card.path}}</h6>
-      <h6>{{card.date}}</h6>
+      <p class="card-title">{{card.title}}</p>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{card.title}}</h5>
       <p class="card-text"> {{card.text}} </p>
-      <a class="btn btn-outline-warning">Check out</a>
+      <a class="btn btn-outline-warning">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="30" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+        </svg>
+      </a>
     </div>
   </div>
 </template>
@@ -19,8 +21,6 @@ export default {
     card: {
       id: Number,
       title: String,
-      path: String,
-      date: String,
       text: String,
     }
   }
@@ -38,18 +38,24 @@ export default {
     border-color: var(--bs-gray-600);
     color: white;
   }
-  .card > .card-header {
+  .card-header {
     display: flex;
     justify-content: space-between;
     border-color: var(--bs-gray-600);
-    color: var(--bs-gray-600);
   }
-  .card > .card-header > * {
+  .card-header > * {
     margin: 0;
+  }
+  .card-header > p {
+    font-size: 1.1rem;
+    font-weight: 500;
   }
   .card-header,
   .card-title,
   .card-text {
     cursor: default;
+  }
+  .btn {
+    padding: 0
   }
 </style>

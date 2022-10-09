@@ -1,7 +1,7 @@
 <template>
   <li class="list-group-item"
       :class="{selected: isSelected}"
-      @click="$emit('selectedLabelChanged', id)"
+      @click="$emit('selectedLabelChanged', title)"
   >{{ title }}</li>
 </template>
 
@@ -9,7 +9,6 @@
 export default {
   name: "LabelItem",
   props: {
-    id: Number,
     title: String,
     isSelected: Boolean
   }

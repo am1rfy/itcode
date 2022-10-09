@@ -27,15 +27,14 @@ export default {
   data() {
     return {
       activeLabelInfo: {
-        id: Number,
         title: String,
         cardsIds: Array
       },
     }
   },
   methods: {
-    selectedLabelChanged(id, title, cardsIds) {
-      [this.activeLabelInfo.id, this.activeLabelInfo.title, this.activeLabelInfo.cardsIds] = [id, title, cardsIds]
+    selectedLabelChanged(title, cardsIds) {
+      [this.activeLabelInfo.title, this.activeLabelInfo.cardsIds] = [title, cardsIds]
     }
   }
 }

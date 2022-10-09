@@ -49,4 +49,7 @@ export default {
   svg {
     fill: var(--bs-gray-600);
   }
+  svg:hover {
+    fill: white;
+  }
 </style>

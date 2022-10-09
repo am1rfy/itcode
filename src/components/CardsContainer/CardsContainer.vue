@@ -25,14 +25,13 @@ export default {
   },
   props: {
     activeLabelInfo: {
-      id: Number,
       title: String,
       cardsIds: Array
     }
   },
   computed: {
     activeCards() {
-      return this.cards.filter(card => this.activeLabelInfo.cardsIds.includes(card.id))
+      return this.cards.filter(item => this.activeLabelInfo.cardsIds.includes(item.id))
     },
     activeLabelIsEmpty() {
       return this.activeLabelInfo.cardsIds.length === 0 ? { justifyContent: 'center', textAlign: 'center' } : { justifyContent: 'initial', textAlign: 'initial' }
