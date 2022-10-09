@@ -15,7 +15,7 @@ export const useLabelStore = defineStore('labels', {
     },
     getters: {
         getItems(state) {
-            return state
+            return state.items
         }
     }
 })

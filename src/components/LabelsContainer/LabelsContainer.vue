@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      labels: useLabelStore().getItems.items
+      labels: useLabelStore().getItems
     }
   },
   methods: {
