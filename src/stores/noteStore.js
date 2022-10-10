@@ -50,8 +50,9 @@ export const useNoteStore = defineStore('notes', {
                 checked: false,
                 deleted: false
             })
+
             // Здесь какая то логика взаимодействия с бэкэндом
-            console.log(this.items)
+
             return newItemId
         }
     }

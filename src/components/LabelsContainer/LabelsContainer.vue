@@ -35,6 +35,22 @@ export default {
       }
     }
   },
+  watch: {
+    // Загрузка id записей в статичные ярлыки
+    'labelStore': {
+      handler: function () {
+        useNoteStore().getItems.forEach(item => {
+          if (item.checked)
+            this.staticLabels.checked.cardsIds.push(item.id)
+          else if (item.deleted)
+            this.staticLabels.trash.cardsIds.push(item.id)
+          else
+            this.staticLabels.all.cardsIds.push(item.id)
+        })
+      },
+      deep: true
+    }
+  },
   computed: {
     userLabels() {
       return this.labelStore.getItems
@@ -61,18 +77,6 @@ export default {
     }
   },
   created() {
-    // Загрузка id записей в статичные ярлыки
-    // todo Сделать так что id записей загружались при каждом изменении в ярлыках:
-    // todo добавлении новой записи, удалении, при отметке и пр
-    useNoteStore().getItems.forEach(item => {
-      if (item.checked)
-        this.staticLabels.checked.cardsIds.push(item.id)
-      else if (item.deleted)
-        this.staticLabels.trash.cardsIds.push(item.id)
-      else
-        this.staticLabels.all.cardsIds.push(item.id)
-    })
-
     // Выбранный по умолчанию ярлык при загрузке страницы
     this.selectedLabelChanged(this.staticLabels.all.title)
     this.labels.forEach(item => {
