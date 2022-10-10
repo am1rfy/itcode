@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useNoteStore = defineStore('notes', {
+export const useTodoItemStore = defineStore('todoItems', {
     state() {
         return {
             items: [
@@ -33,11 +33,6 @@ export const useNoteStore = defineStore('notes', {
                     deleted: false
                 }
             ]
-        }
-    },
-    getters: {
-        getItems(state) {
-            return state.items
         }
     },
     actions: {

@@ -1,49 +1,51 @@
 <template>
   <HeaderComponent
-    :active-label-name="activeLabelName"
+    :active-todo-list-name="activeTodoListName"
   />
   <div class="main-container">
-    <LabelsContainer
-        @selectedLabelChanged="selectedLabelChanged"
-        :active-label-name="activeLabelName"
+    <TodoListContainer
+        @activeTodoListChanged="activeTodoListChanged"
+        :active-todo-list-name="activeTodoListName"
     />
-    <CardsContainer :active-label-info="activeLabelInfo"/>
+    <TodoItemContainer
+        :active-todo-list-info="activeTodoListInfo"
+    />
   </div>
 </template>
 
 <script>
-import HeaderComponent from '../components/HeaderComponent.vue'
-import LabelsContainer from '../components/LabelsContainer/LabelsContainer.vue'
-import CardsContainer from '../components/CardsContainer/CardsContainer.vue'
+import HeaderComponent from '@/components/HeaderComponent'
+import TodoListContainer from '@/components/TodoList/TodoListContainer'
+import TodoItemContainer from '@/components/TodoItem/TodoItemContainer'
 
 export default {
   name: 'TodoPage',
   components: {
     HeaderComponent,
-    LabelsContainer,
-    CardsContainer
+    TodoListContainer,
+    TodoItemContainer
   },
   props: {
-    activeLabelName: String
+    activeTodoListName: String
   },
   data() {
     return {
-      activeLabelInfo: {
+      activeTodoListInfo: {
         title: String,
-        cardsIds: Array
-      },
+        todoItemsIds: Array
+      }
     }
   },
   methods: {
-    selectedLabelChanged(title, cardsIds) {
-      [this.activeLabelInfo.title, this.activeLabelInfo.cardsIds] = [title, cardsIds]
+    activeTodoListChanged(title, todoItemsIds) {
+      [this.activeTodoListInfo.title, this.activeTodoListInfo.todoItemsIds] = [title, todoItemsIds]
     }
   }
 }
 </script>
 
 <style scoped>
-.main-container {
-  margin-top: 16px;
-}
+  .main-container {
+    margin-top: 16px;
+  }
 </style>
