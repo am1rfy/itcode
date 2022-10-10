@@ -3,8 +3,7 @@
     <ul class="list-group">
       <LabelItem
           v-for="item in labels"
-          :key="item.id"
-          :id="item.id"
+          :key="item.title"
           :title="item.title"
           :is-selected="item.isSelected"
           @selectedLabelChanged="selectedLabelChanged"
@@ -14,7 +13,9 @@
 </template>
 
 <script>
-import LabelItem from './LabelItem'
+import LabelItem from '@/components/LabelsContainer/LabelItem'
+import { useLabelStore } from '@/stores/labelStore'
+import { useNoteStore } from "@/stores/noteStore"
 
 export default {
   name: 'LabelsContainer',
@@ -26,22 +27,48 @@ export default {
   },
   data() {
     return {
-      labels: [
-        {id: 1, title: 'All', cardsIds: [1, 2, 3, 4, 5], isSelected: false},
-        {id: 2, title: 'Label1', cardsIds: [1, 2], isSelected: false},
-        {id: 3, title: 'Label2', cardsIds: [4], isSelected: false},
-        {id: 4, title: 'Label3', cardsIds: [], isSelected: false},
-        {id: 5, title: 'Label4', cardsIds: [3], isSelected: false},
-        {id: 6, title: 'Trash', cardsIds: [], isSelected: false},
-      ],
+      labelStore: useLabelStore(),
+      staticLabels: {
+        all: {title: 'All', cardsIds: [], isSelected: false},
+        trash: {title: 'Trash', cardsIds: [], isSelected: false},
+        checked: {title: 'Checked', cardsIds: [], isSelected: false}
+      }
+    }
+  },
+  watch: {
+    // Загрузка id записей в статичные ярлыки
+    'labelStore': {
+      handler: function () {
+        useNoteStore().getItems.forEach(item => {
+          if (item.checked)
+            this.staticLabels.checked.cardsIds.push(item.id)
+          else if (item.deleted)
+            this.staticLabels.trash.cardsIds.push(item.id)
+          else
+            this.staticLabels.all.cardsIds.push(item.id)
+        })
+      },
+      deep: true
+    }
+  },
+  computed: {
+    userLabels() {
+      return this.labelStore.getItems
+    },
+    labels() {
+      return [this.staticLabels.all].concat(
+          this.userLabels,
+          [this.staticLabels.trash],
+          [this.staticLabels.checked]
+      )
     }
   },
   methods: {
-    selectedLabelChanged(id) {
+    selectedLabelChanged(title) {
       this.labels.forEach(item => {
-        if (item.id === id) {
+        if (item.title === title) {
           item.isSelected = true
-          this.$emit('selectedLabelChanged', item.id, item.title, item.cardsIds)
+          this.$emit('selectedLabelChanged', item.title, item.cardsIds)
           this.$router.push(`/label/${item.title}`)
         } else {
           item.isSelected = false
@@ -50,10 +77,11 @@ export default {
     }
   },
   created() {
-    this.selectedLabelChanged(this.labels[0].id)
+    // Выбранный по умолчанию ярлык при загрузке страницы
+    this.selectedLabelChanged(this.staticLabels.all.title)
     this.labels.forEach(item => {
       if (this.activeLabelName && item.title.toLowerCase() === this.activeLabelName.toLowerCase()) {
-        this.selectedLabelChanged(item.id)
+        this.selectedLabelChanged(item.title)
       }
     })
   }
