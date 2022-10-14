@@ -1,6 +1,6 @@
 <template>
   <li class="list-group-item"
-      :class="{active: isActive}"
+      :class="{selected: isActive}"
       @click="$emit('activeTodoListChanged', title)"
   >{{ title }}</li>
 </template>
@@ -29,7 +29,7 @@ export default {
   .list-group-item:hover {
     background-color: var(--bs-gray-800);
   }
-  .active {
+  .selected {
     color: var(--bs-warning);
   }
 </style>

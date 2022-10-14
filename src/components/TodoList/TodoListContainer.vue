@@ -68,7 +68,6 @@ export default {
         }
       })
     },
-    // Загрузка id записей в статичные ярлыки
     loadTodoItemsIds() {
       this.todoItems.forEach(item => {
         if (item.checked)
@@ -83,7 +82,6 @@ export default {
   created() {
     this.loadTodoItemsIds()
 
-    // Выбранный по умолчанию ярлык при загрузке страницы
     this.activeTodoListChanged(this.defaultTodoLists.all.title)
     this.todoLists.forEach(item => {
       if (this.activeTodoListName && item.title.toLowerCase() === this.activeTodoListName.toLowerCase()) {
