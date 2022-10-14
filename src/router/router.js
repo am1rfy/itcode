@@ -1,4 +1,5 @@
-import {createRouter, createWebHistory} from "vue-router"
+import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/userStore'
 
 const routes = [
     {
@@ -58,7 +59,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title
-    next()
+
+    const userStore = useUserStore()
+    !userStore.token && to.name !== 'Login' ? next({name: 'Login'}) : next()
 })
 
 export default router
