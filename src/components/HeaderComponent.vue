@@ -13,8 +13,8 @@
           </svg>
         </router-link>
         <button class="btn btn-outline-warning create-btn" type="submit"
-                @click="createNode"
-                :disabled="activeTodoListIsStatic"
+                :disabled="activeTodoListIsDefault"
+                @click="createTodoItem"
         >Create</button>
       </div>
     </div>
@@ -23,39 +23,26 @@
 
 <script>
 import { useTodoItemStore } from "@/stores/todoItemStore"
-import { useTodoListStore } from "@/stores/todoListStore"
+import { useTodoListStore } from '@/stores/todoListStore'
 
 export default {
   name: 'HeaderComponent',
   data() {
     return {
-      todoListStore: useTodoListStore(),
-      todoItemStore: useTodoItemStore()
+      todoItemStore: useTodoItemStore(),
+      todoListStore: useTodoListStore()
     }
   },
-  props: {
-    activeTodoListName: String
-  },
   computed: {
-    todoLists() {
-      return this.todoListStore.items
-    },
-    activeTodoListIsStatic() {
-      for (let i = 0; i < this.todoLists.length; i++) {
-        if (this.todoLists[i].title === this.activeTodoListName) return false
-      }
-      return true
+    activeTodoListIsDefault() {
+      return this.todoListStore.activeTodoList.isDefault
     }
   },
   methods: {
-    createNode() {
-      this.todoLists.forEach(item => {
-        if (item.title === this.activeTodoListName) {
-          item.todoItemsIds.push(this.todoItemStore.createNote({
-            title: this.activeTodoListName,
-            text: this.activeTodoListName
-          }))
-        }
+    createTodoItem() {
+      this.todoItemStore.create({
+        title: 'New note',
+        text: 'this note is unique'
       })
     }
   }

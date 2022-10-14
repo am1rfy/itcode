@@ -1,16 +1,17 @@
 <template>
-  <div class="cards-container" :style="activeTodoListIsEmpty">
-    <template v-if="activeTodoListInfo.todoItemsIds.length !== 0">
+  <div class="cards-container" :style="activeTodoItemsExist">
+    <template v-if="activeTodoItems.length !== 0">
       <TodoItem
         v-for="item in activeTodoItems"
         :key="item.id"
-        :todoItem="item"
+        :id="item.id"
+        :title="item.title"
+        :text="item.text"
+        @markTodoItemAsChecked="markTodoItemAsChecked"
       />
     </template>
     <template v-else>
-      <div class="todo-list-is-empty">
-        "{{activeTodoListInfo.title}}" is now empty
-      </div>
+      <div class="todo-list-is-empty">This tag is now Empty</div>
     </template>
   </div>
 </template>
@@ -29,21 +30,20 @@ export default {
       todoItemStore: useTodoItemStore()
     }
   },
-  props: {
-    activeTodoListInfo: {
-      title: String,
-      todoItemsIds: Array
-    }
-  },
   computed: {
     todoItems() {
       return this.todoItemStore.items
     },
     activeTodoItems() {
-      return this.todoItems.filter(item => this.activeTodoListInfo.todoItemsIds.includes(item.id))
+      return this.todoItemStore.activeTodoItems
     },
-    activeTodoListIsEmpty() {
-      return this.activeTodoListInfo.todoItemsIds.length === 0 ? { justifyContent: 'center', textAlign: 'center' } : { justifyContent: 'initial', textAlign: 'initial' }
+    activeTodoItemsExist() {
+      return this.activeTodoItems.length !== 0 ? { justifyContent: 'initial', textAlign: 'initial' } : { justifyContent: 'center', textAlign: 'center' }
+    }
+  },
+  methods: {
+    markTodoItemAsChecked(id) {
+      this.todoItemStore.check(id)
     }
   }
 }

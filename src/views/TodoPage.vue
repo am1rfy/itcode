@@ -1,15 +1,8 @@
 <template>
-  <HeaderComponent
-    :active-todo-list-name="activeTodoListName"
-  />
+  <HeaderComponent/>
   <div class="main-container">
-    <TodoListContainer
-        @activeTodoListChanged="activeTodoListChanged"
-        :active-todo-list-name="activeTodoListName"
-    />
-    <TodoItemContainer
-        :active-todo-list-info="activeTodoListInfo"
-    />
+    <TodoListContainer/>
+    <TodoItemContainer/>
   </div>
 </template>
 
@@ -17,6 +10,7 @@
 import HeaderComponent from '@/components/HeaderComponent'
 import TodoListContainer from '@/components/TodoList/TodoListContainer'
 import TodoItemContainer from '@/components/TodoItem/TodoItemContainer'
+import { useTodoListStore } from '@/stores/todoListStore'
 
 export default {
   name: 'TodoPage',
@@ -30,16 +24,11 @@ export default {
   },
   data() {
     return {
-      activeTodoListInfo: {
-        title: String,
-        todoItemsIds: Array
-      }
+      todoListStore: useTodoListStore()
     }
   },
-  methods: {
-    activeTodoListChanged(title, todoItemsIds) {
-      [this.activeTodoListInfo.title, this.activeTodoListInfo.todoItemsIds] = [title, todoItemsIds]
-    }
+  created() {
+    this.todoListStore.setActiveTodoList(this.activeTodoListName)
   }
 }
 </script>

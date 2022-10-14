@@ -1,7 +1,7 @@
 <template>
   <li class="list-group-item"
       :class="{selected: isActive}"
-      @click="$emit('activeTodoListChanged', title)"
+      @click="$emit('changeActiveTodoList', title)"
   >{{ title }}</li>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   props: {
     title: String,
     isActive: Boolean
-  }
+  },
 }
 </script>
 

@@ -10,7 +10,7 @@ const routes = [
         component: () => import('@/views/TodoPage')
     },
     {
-        path: '/label/:activeTodoListName',
+        path: '/tags/:activeTodoListName',
         meta: {
             title: 'Notes'
         },

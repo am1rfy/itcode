@@ -6,7 +6,7 @@
           :key="item.title"
           :title="item.title"
           :is-active="item.isActive"
-          @activeTodoListChanged="activeTodoListChanged"
+          @changeActiveTodoList="changeActiveTodoList"
       />
     </ul>
   </div>
@@ -15,79 +15,27 @@
 <script>
 import TodoList from '@/components/TodoList/TodoList'
 import { useTodoListStore } from '@/stores/todoListStore'
-import { useTodoItemStore } from '@/stores/todoItemStore'
 
 export default {
   name: 'TodoListContainer',
   components: {
     TodoList
   },
-  props: {
-    activeTodoListName: String
-  },
   data() {
     return {
-      todoListStore: useTodoListStore(),
-      todoItemStore: useTodoItemStore(),
-      defaultTodoLists: {
-        all: {title: 'All', todoItemsIds: [], isActive: false},
-        trash: {title: 'Trash', todoItemsIds: [], isActive: false},
-        checked: {title: 'Checked', todoItemsIds: [], isActive: false}
-      }
-    }
-  },
-  watch: {
-    'todoListStore': {
-      handler: 'loadTodoItemsIds',
-      deep: true
+      todoListStore: useTodoListStore()
     }
   },
   computed: {
-    userTodoLists() {
-      return this.todoListStore.items
-    },
     todoLists() {
-      return [this.defaultTodoLists.all].concat(
-          this.userTodoLists,
-          [this.defaultTodoLists.trash],
-          [this.defaultTodoLists.checked]
-      )
-    },
-    todoItems() {
-      return this.todoItemStore.items
+      return this.todoListStore.items
     }
   },
   methods: {
-    activeTodoListChanged(title) {
-      this.todoLists.forEach(item => {
-        item.isActive = false
-        if (item.title === title) {
-          item.isActive = true
-          this.$emit('activeTodoListChanged', item.title, item.todoItemsIds)
-          this.$router.push(`/label/${item.title}`)
-        }
-      })
-    },
-    loadTodoItemsIds() {
-      this.todoItems.forEach(item => {
-        if (item.checked)
-          this.defaultTodoLists.checked.todoItemsIds.push(item.id)
-        else if (item.deleted)
-          this.defaultTodoLists.trash.todoItemsIds.push(item.id)
-        else
-          this.defaultTodoLists.all.todoItemsIds.push(item.id)
-      })
+    changeActiveTodoList(title) {
+      this.todoListStore.setActiveTodoList(title)
+      this.$router.push(`/tags/${title}`)
     }
-  },
-  created() {
-    this.loadTodoItemsIds()
-
-    this.activeTodoListChanged(this.defaultTodoLists.all.title)
-    this.todoLists.forEach(item => {
-      if (this.activeTodoListName && item.title.toLowerCase() === this.activeTodoListName.toLowerCase()) {
-        this.activeTodoListChanged(item.title)
-      }
-    })
   }
 }
 </script>
