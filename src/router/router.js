@@ -18,6 +18,22 @@ const routes = [
         props: true
     },
     {
+        path: '/sign-in',
+        name: 'Login',
+        meta: {
+            title: 'Sign in'
+        },
+        component: () => import('@/views/LoginPage')
+    },
+    {
+        path: '/sign-up',
+        name: 'Register',
+        meta: {
+            title: 'Sign up'
+        },
+        component: () => import('@/views/RegisterPage')
+    },
+    {
         path: '/settings/',
         name: 'Settings',
         meta: {
