@@ -5,7 +5,7 @@ import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
 
-import router from "./router/router";
+import router from '@/router/router'
 
 const pinia = createPinia()
 
