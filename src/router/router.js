@@ -61,7 +61,7 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title
 
     const userStore = useUserStore()
-    !userStore.token && to.name !== 'Login' ? next({name: 'Login'}) : next()
+    !userStore.token && to.name !== 'Login' && to.name !== 'Register' ? next({name: 'Login'}) : next()
 })
 
 export default router

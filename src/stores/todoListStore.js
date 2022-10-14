@@ -25,7 +25,7 @@ export const useTodoListStore = defineStore('todoLists', {
         }
     },
     actions: {
-        setActiveTodoList: function (title) {
+        setActiveTodoList(title) {
             this.items.forEach(item => {
                 item.isActive = item.title === title
             })
