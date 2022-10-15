@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/userStore'
 
 const routes = [
     {
@@ -60,8 +59,12 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title
 
-    const userStore = useUserStore()
-    !userStore.token && to.name !== 'Login' && to.name !== 'Register' ? next({name: 'Login'}) : next()
+    if (!localStorage.getItem('token') && to.name !== 'Login' && to.name !== 'Register')
+        next({name: 'Login'})
+    else if (localStorage.getItem('token') && (to.name === 'Login' || to.name === 'Register'))
+        next({name: 'Home'})
+    else
+        next()
 })
 
 export default router
