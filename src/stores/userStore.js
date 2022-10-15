@@ -1,52 +1,36 @@
 import {defineStore} from 'pinia'
-import {responseProcessing} from '@/stores/responseProcessing'
+import { user, setToken } from '@/services/index'
+import { responseHandler } from '@/services/responseHandler'
 
 export const useUserStore = defineStore('user', {
-    state() {
-        return {
-            _token: undefined,
-        }
-    },
-    getters: {
-        token(state) {
-            if (!state._token) {
-                state._token = localStorage.getItem('token')
-            }
-            return state._token
-        }
-    },
     actions: {
-        async login(username, password) {
-            let resp
-
+        async handleLogin(username, password) {
             try {
-                resp = await this.$axios.post(
-                    '/user/login/',
-                    {username, password}
-                )
-                this._token = resp.data.token
-                localStorage.setItem('token', this._token)
+                const resp = await user.login({username, password})
+                return saveToken(resp)
             }
             catch (err) {
-                resp = err.response
+                return {isSuccess: false, msg: err.message}
             }
-            return responseProcessing(resp)
         },
-        async register(username, password) {
-            let resp
-
+        async handleRegister(username, password) {
             try {
-                resp = await this.$axios.post(
-                    '/user/register/',
-                    {username, password}
-                )
-                this._token = resp.data.token
-                localStorage.setItem('token', this._token)
+                const resp = await user.register({username, password})
+                return saveToken(resp)
             }
             catch (err) {
-                resp = err.response
+                return {isSuccess: false, msg: err.message}
             }
-            return responseProcessing(resp)
         }
     }
 })
+
+function saveToken(resp) {
+    let [isSuccess, msg] = responseHandler(resp)
+
+    if (isSuccess) {
+        localStorage.setItem('token', resp.data.token)
+        setToken(localStorage.getItem('token'))
+    }
+    return {isSuccess, msg}
+}
