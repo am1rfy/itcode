@@ -4,7 +4,15 @@ import {responseProcessing} from '@/stores/responseProcessing'
 export const useUserStore = defineStore('user', {
     state() {
         return {
-            token: undefined,
+            _token: undefined,
+        }
+    },
+    getters: {
+        token(state) {
+            if (!state._token) {
+                state._token = localStorage.getItem('token')
+            }
+            return state._token
         }
     },
     actions: {
@@ -16,7 +24,8 @@ export const useUserStore = defineStore('user', {
                     '/user/login/',
                     {username, password}
                 )
-                this.token = resp.data.token
+                this._token = resp.data.token
+                localStorage.setItem('token', this._token)
             }
             catch (err) {
                 resp = err.response
@@ -31,7 +40,8 @@ export const useUserStore = defineStore('user', {
                     '/user/register/',
                     {username, password}
                 )
-                this.token = resp.data.token
+                this._token = resp.data.token
+                localStorage.setItem('token', this._token)
             }
             catch (err) {
                 resp = err.response
