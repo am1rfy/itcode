@@ -1,4 +1,4 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia'
 import { user, setToken } from '@/services/index'
 import { responseHandler } from '@/services/responseHandler'
 
