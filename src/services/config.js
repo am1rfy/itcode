@@ -1,9 +1,9 @@
 const baseURL = process.env.VUE_APP_API_URL
 
-let token = ''
+let token = undefined
 
 const setToken = _token => {
-    this.token = _token
+    token = _token
 }
 
 export {

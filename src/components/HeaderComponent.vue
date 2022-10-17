@@ -1,34 +1,85 @@
 <template>
-  <nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-      <form class="d-flex" role="search">
-        <input class="form-control me-2 col-1" type="search" placeholder="Enter" aria-label="Search">
-        <button class="btn btn-outline-warning" type="submit">Search</button>
-      </form>
-      <div class="right-side-header">
-        <router-link to="/settings/">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-            <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-            <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-          </svg>
-        </router-link>
-        <button class="btn btn-outline-warning create-btn" type="submit"
-                :disabled="activeTodoListIsDefault"
-                @click="createTodoItem"
-        >Create</button>
-      </div>
-    </div>
-  </nav>
+  <el-menu
+      :default-active="activeIndex"
+      class="el-menu-demo"
+      mode="horizontal"
+  >
+    <el-menu-item index="1">
+      <el-icon size="58px">
+        <Management />
+      </el-icon>
+      <p id="logo">NOTES</p>
+    </el-menu-item>
+
+    <div class="flex-grow" />
+
+    <el-tooltip
+        class="box-item"
+        effect="light"
+        content="Edit tags"
+        placement="bottom"
+    >
+    <el-menu-item
+        index="2"
+        @click="editTodoLists"
+    >
+      <el-icon size="58px">
+        <EditPen />
+      </el-icon>
+    </el-menu-item>
+    </el-tooltip>
+
+    <el-tooltip
+        class="box-item"
+        effect="light"
+        content="Create note"
+        placement="bottom"
+    >
+    <el-menu-item
+        index="3"
+        v-show="!activeTodoListIsDefault"
+        @click="createTodoItem"
+    >
+      <el-icon size="58px">
+        <Plus />
+      </el-icon>
+    </el-menu-item>
+    </el-tooltip>
+
+    <el-sub-menu index="4">
+      <template #title>
+        <el-icon size="58px">
+          <Menu />
+        </el-icon>
+      </template>
+
+      <el-menu-item
+          index="4-1"
+          @click="$router.push('/settings/')"
+      >Settings
+      </el-menu-item>
+
+      <el-menu-item
+          index="4-2"
+          @click="userStore.handleLogout()"
+      >Sign out
+      </el-menu-item>
+
+    </el-sub-menu>
+
+  </el-menu>
 </template>
 
 <script>
-import { useTodoItemStore } from "@/stores/todoItemStore"
+import { useTodoItemStore } from '@/stores/todoItemStore'
 import { useTodoListStore } from '@/stores/todoListStore'
+import { useUserStore } from '@/stores/userStore'
 
 export default {
   name: 'HeaderComponent',
   data() {
     return {
+      userStore: useUserStore(),
       todoItemStore: useTodoItemStore(),
       todoListStore: useTodoListStore()
     }
@@ -44,32 +95,23 @@ export default {
         title: 'New note',
         text: 'this note is unique'
       })
+    },
+    editTodoLists() {
+      // TODO
     }
   }
 }
 </script>
 
 <style scoped>
-  .navbar {
-    border-bottom: solid 1px var(--bs-gray-600);
+  .flex-grow {
+    flex-grow: 1;
   }
-  .container-fluid > * {
-    margin: 10px 0 10px 0;
+  .box-item {
+    width: 110px;
+    margin-top: 10px;
   }
-  .container-fluid > form > input {
-    font-weight: bolder;
-  }
-  .btn {
-    font-weight: bolder;
-    border-width: 2px;
-  }
-  .create-btn {
-    margin-left: 1rem
-  }
-  svg {
-    fill: var(--bs-gray-600);
-  }
-  svg:hover {
-    fill: white;
+  #logo {
+    font-size: large;
   }
 </style>

@@ -1,9 +1,24 @@
 <template>
-  <HeaderComponent/>
-  <div class="main-container">
-    <TodoListContainer/>
-    <TodoItemContainer/>
-  </div>
+    <div class="common-layout">
+      <el-container>
+
+        <el-header>
+          <HeaderComponent/>
+        </el-header>
+
+        <el-container>
+
+          <el-aside width="200px">
+            <TodoListContainer/>
+          </el-aside>
+
+          <el-main>
+            <TodoItemContainer/>
+          </el-main>
+
+        </el-container>
+      </el-container>
+    </div>
 </template>
 
 <script>
@@ -34,7 +49,5 @@ export default {
 </script>
 
 <style scoped>
-  .main-container {
-    margin-top: 16px;
-  }
+
 </style>

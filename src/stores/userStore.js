@@ -21,6 +21,9 @@ export const useUserStore = defineStore('user', {
             catch (err) {
                 return {isSuccess: false, msg: err.message}
             }
+        },
+        handleLogout() {
+            setToken(undefined)
         }
     }
 })
