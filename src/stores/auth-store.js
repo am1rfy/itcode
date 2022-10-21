@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { auth, setToken, responseHandler} from '../services/index.js'
 
-export const useUserStore = defineStore('user', {
+export const useAuthStore = defineStore('auth', {
     actions: {
         async handleLogin(username, password) {
             try {
@@ -30,9 +30,8 @@ export const useUserStore = defineStore('user', {
 function saveToken(resp) {
     let [isSuccess, msg] = responseHandler(resp)
 
-    if (isSuccess) {
-        localStorage.setItem('token', resp.data.token)
-        setToken(localStorage.getItem('token'))
-    }
+    if (isSuccess)
+        setToken(resp.data.token)
+
     return {isSuccess, msg}
 }
