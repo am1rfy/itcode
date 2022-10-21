@@ -17,6 +17,10 @@
         effect="light"
         content="Edit tags"
         placement="bottom"
+        :show-after="200"
+        :hide-after="0"
+        :visible-arrow="false"
+        :offset="6"
     >
       <el-menu-item
           index="2"
@@ -33,6 +37,10 @@
         effect="light"
         content="Create note"
         placement="bottom"
+        :show-after="200"
+        :hide-after="0"
+        :visible-arrow="false"
+        :offset="6"
     >
       <el-menu-item
           index="3"
@@ -60,7 +68,7 @@
 
       <el-menu-item
           index="4-2"
-          @click="userStore.handleLogout()"
+          @click="logout"
       >Sign out
       </el-menu-item>
 
@@ -72,13 +80,13 @@
 <script>
 import { useTodoItemStore } from '../stores/todo-item-store.js'
 import { useTodoListStore } from '../stores/todo-list-store.js'
-import { useUserStore } from '../stores/user-store.js'
+import { useAuthStore } from '../stores/auth-store.js'
 
 export default {
   name: 'todoHeader',
   data() {
     return {
-      userStore: useUserStore(),
+      authStore: useAuthStore(),
       todoItemStore: useTodoItemStore(),
       todoListStore: useTodoListStore()
     }
@@ -90,13 +98,18 @@ export default {
   },
   methods: {
     createTodoItem() {
-      this.todoItemStore.create({
+      this.todoItemStore.handleCreate({
+        activeTodoListTitle: this.todoListStore.activeTodoList.title,
         title: 'New note',
         text: 'this note is unique'
       })
     },
     editTodoLists() {
       // TODO
+    },
+    logout() {
+      this.authStore.handleLogout()
+      this.$router.push('/sign-in')
     }
   }
 }

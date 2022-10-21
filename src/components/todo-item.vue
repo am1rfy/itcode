@@ -1,19 +1,50 @@
 <template>
-  <div class="card bg-dark">
-    <div class="card-header">
-      <p class="card-title">{{title}}</p>
+  <el-card
+      class="box-card"
+      shadow="hover"
+      @dblclick="$emit('cardDblClick', id)"
+  >
+    <template #header>
+      <div class="card-header">
+        <p id="title">
+          {{title}}
+        </p>
+
+        <div class="flex-grow" />
+
+        <el-dropdown
+            trigger="click"
+        >
+          <span class="el-dropdown-link">
+            <el-icon size="24px"><More /></el-icon>
+          </span>
+
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item
+                  @click="$emit('switchDoneStatus', id)"
+              >
+                {{doneSwitchTitle}}
+              </el-dropdown-item>
+
+              <el-dropdown-item
+                  @click="$emit('deleteItem', id)"
+              >
+                Delete note
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+
+        </el-dropdown>
+      </div>
+    </template>
+    <div
+        class="text item"
+        id="text"
+    >
+      {{text}}
     </div>
-    <div class="card-body">
-      <p class="card-text"> {{text}} </p>
-      <a class="btn btn-outline-warning"
-         @click="$emit('markTodoItemAsChecked', id)"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="30" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-        </svg>
-      </a>
-    </div>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -22,11 +53,49 @@ export default {
   props: {
     id: Number,
     title: String,
-    text: String
+    text: String,
+    isDone: Boolean
+  },
+  computed: {
+    doneSwitchTitle() {
+      return this.isDone ? 'Uncheck item' : 'Mark as checked'
+    }
   }
 }
 </script>
 
 <style scoped>
+  .box-card {
+    width: 600px;
+    margin: 0 auto 20px auto;
+  }
+  .card-header {
+    display: flex;
+  }
+  .el-dropdown-link {
+    color: #303133;
 
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  #title {
+    color: #303133;
+
+    display: flex;
+    align-items: center;
+
+    font-weight: bolder;
+  }
+  .el-dropdown-link:hover {
+    background-color: var(--el-border-color-light)
+  }
+  #title,
+  #text {
+    cursor: default;
+    text-align: start;
+  }
+  .flex-grow {
+    flex-grow: 1;
+  }
 </style>

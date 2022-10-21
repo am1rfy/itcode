@@ -1,15 +1,17 @@
 <template>
-  <div class="todo-lists-bar">
-    <ul class="list-group">
-      <todoList
-          v-for="item in todoLists"
-          :key="item.title"
-          :title="item.title"
-          :is-active="item.isActive"
-          @changeActiveTodoList="changeActiveTodoList"
-      />
-    </ul>
-  </div>
+  <el-menu
+      class="el-menu-vertical-demo"
+      :default-active="String(todoListStore.items.findIndex(item => item === todoListStore.activeTodoList) + 1)"
+  >
+    <todoList
+        v-for="(item, index) in todoLists"
+        :index="String(index + 1)"
+        :key="item.title"
+        :title="item.title"
+        :is-active="item.isActive"
+        @changeActiveTodoList="changeActiveTodoList"
+    />
+  </el-menu>
 </template>
 
 <script>
@@ -41,10 +43,7 @@ export default {
 </script>
 
 <style scoped>
-  .todo-lists-bar {
-    padding: 0 10px 0 10px;
-    width: 22.6%;
-
-    float: left;
+  .el-menu-vertical-demo {
+    border: 0;
   }
 </style>

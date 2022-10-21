@@ -1,9 +1,26 @@
 <template>
-  <todoHeader/>
-  <div class="main-container">
-    <todoListContainer/>
-    <todoItemContainer/>
-  </div>
+  <el-scrollbar>
+    <div class="common-layout">
+      <el-container>
+
+        <el-header id="header">
+          <todoHeader/>
+        </el-header>
+
+        <el-container>
+
+          <el-aside id="aside" width="300px">
+            <todoListContainer/>
+          </el-aside>
+
+          <el-main id="main">
+            <todoItemContainer/>
+          </el-main>
+
+        </el-container>
+      </el-container>
+    </div>
+  </el-scrollbar>
 </template>
 
 <script>
@@ -35,7 +52,11 @@ export default {
 </script>
 
 <style scoped>
-  .main-container {
-    margin-top: 16px;
+  #header {
+    padding: 0;
+    border-bottom: solid 1px var(--el-menu-border-color)
+  }
+  #aside {
+    margin-top: 20px;
   }
 </style>

@@ -38,7 +38,7 @@
 <script>
 import authLink from '../components/auth-link.vue'
 import authForm from '../components/auth-form.vue'
-import { useUserStore } from '../stores/user-store.js'
+import { useAuthStore } from '../stores/auth-store.js'
 
 export default {
   name: 'loginPage',
@@ -48,13 +48,13 @@ export default {
   },
   data() {
     return {
-      userStore: useUserStore(),
+      authStore: useAuthStore(),
       errorMsg: ''
     }
   },
   methods: {
     async login(username, password) {
-      const {isSuccess, msg} = await this.userStore.handleLogin(username, password)
+      const {isSuccess, msg} = await this.authStore.handleLogin(username, password)
       // TODO: убрать
       console.log(isSuccess, msg)
       if (isSuccess)
