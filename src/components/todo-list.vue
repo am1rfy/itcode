@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'TodoList',
+  name: 'todoList',
   props: {
     title: String,
     isActive: Boolean
