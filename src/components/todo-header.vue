@@ -17,6 +17,10 @@
         effect="light"
         content="Edit tags"
         placement="bottom"
+        :show-after="200"
+        :hide-after="0"
+        :visible-arrow="false"
+        :offset="6"
     >
       <el-menu-item
           index="2"
@@ -33,6 +37,10 @@
         effect="light"
         content="Create note"
         placement="bottom"
+        :show-after="200"
+        :hide-after="0"
+        :visible-arrow="false"
+        :offset="6"
     >
       <el-menu-item
           index="3"
