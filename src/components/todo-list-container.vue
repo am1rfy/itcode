@@ -1,6 +1,7 @@
 <template>
   <el-menu
       class="el-menu-vertical-demo"
+      :default-active="String(todoListStore.items.findIndex(item => item === todoListStore.activeTodoList) + 1)"
   >
     <todoList
         v-for="(item, index) in todoLists"
