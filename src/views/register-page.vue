@@ -40,7 +40,7 @@
 import authForm from '../components/auth-form.vue'
 import authLink from '../components/auth-link.vue'
 
-import { useUserStore } from '../stores/user-store.js'
+import { useAuthStore } from '../stores/auth-store.js'
 
 export default {
   name: 'registerPage',
@@ -50,13 +50,13 @@ export default {
   },
   data() {
     return {
-      userStore: useUserStore(),
+      authStore: useAuthStore(),
       errorMsg: ''
     }
   },
   methods: {
     async register(username, password) {
-      const {isSuccess, msg} = await this.userStore.handleRegister(username, password)
+      const {isSuccess, msg} = await this.authStore.handleRegister(username, password)
       // TODO: убрать
       console.log(isSuccess, msg)
       if (isSuccess)

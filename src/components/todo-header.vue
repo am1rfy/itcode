@@ -60,7 +60,7 @@
 
       <el-menu-item
           index="4-2"
-          @click="userStore.handleLogout()"
+          @click="logout"
       >Sign out
       </el-menu-item>
 
@@ -72,13 +72,13 @@
 <script>
 import { useTodoItemStore } from '../stores/todo-item-store.js'
 import { useTodoListStore } from '../stores/todo-list-store.js'
-import { useUserStore } from '../stores/user-store.js'
+import { useAuthStore } from '../stores/auth-store.js'
 
 export default {
   name: 'todoHeader',
   data() {
     return {
-      userStore: useUserStore(),
+      authStore: useAuthStore(),
       todoItemStore: useTodoItemStore(),
       todoListStore: useTodoListStore()
     }
@@ -97,6 +97,10 @@ export default {
     },
     editTodoLists() {
       // TODO
+    },
+    logout() {
+      this.authStore.handleLogout()
+      this.$router.push('/sign-in')
     }
   }
 }
