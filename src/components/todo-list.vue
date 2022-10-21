@@ -2,12 +2,13 @@
   <el-menu-item
       @click="$emit('changeActiveTodoList', title)"
       :index="index"
+      class="list-item"
   >
-    <el-icon>
+    <el-icon size="16px">
       <ArrowRight />
     </el-icon>
     <template #title>
-      {{ title }}
+      <p id="title">{{ title }}</p>
     </template>
   </el-menu-item>
 </template>
@@ -24,4 +25,10 @@ export default {
 </script>
 
 <style scoped>
+  #title {
+    font-size: 16px;
+  }
+  .list-item {
+    height: 75px;
+  }
 </style>

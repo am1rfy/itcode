@@ -98,7 +98,8 @@ export default {
   },
   methods: {
     createTodoItem() {
-      this.todoItemStore.create({
+      this.todoItemStore.handleCreate({
+        activeTodoListTitle: this.todoListStore.activeTodoList.title,
         title: 'New note',
         text: 'this note is unique'
       })
