@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-// import qs from 'qs'
-
 import { token } from './config.js'
 import { baseURL } from './config.js'
 
