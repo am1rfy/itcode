@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router"
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
     {
@@ -16,6 +16,22 @@ const routes = [
         },
         component: () => import('@/views/TodoPage'),
         props: true
+    },
+    {
+        path: '/sign-in',
+        name: 'Login',
+        meta: {
+            title: 'Sign in'
+        },
+        component: () => import('@/views/LoginPage')
+    },
+    {
+        path: '/sign-up',
+        name: 'Register',
+        meta: {
+            title: 'Sign up'
+        },
+        component: () => import('@/views/RegisterPage')
     },
     {
         path: '/settings/',
@@ -42,7 +58,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title
-    next()
+
+    if (!localStorage.getItem('token') && to.name !== 'Login' && to.name !== 'Register')
+        next({name: 'Login'})
+    else if (localStorage.getItem('token') && (to.name === 'Login' || to.name === 'Register'))
+        next({name: 'Home'})
+    else
+        next()
 })
 
 export default router
