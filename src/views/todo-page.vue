@@ -1,9 +1,24 @@
 <template>
-  <todoHeader/>
-  <div class="main-container">
-    <todoListContainer/>
-    <todoItemContainer/>
-  </div>
+    <div class="common-layout">
+      <el-container>
+
+        <el-header id="header">
+          <todoHeader/>
+        </el-header>
+
+        <el-container>
+
+          <el-aside width="200px">
+            <todoListContainer/>
+          </el-aside>
+
+          <el-main>
+            <todoItemContainer/>
+          </el-main>
+
+        </el-container>
+      </el-container>
+    </div>
 </template>
 
 <script>
@@ -35,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-  .main-container {
-    margin-top: 16px;
+  #header {
+    padding: 0;
   }
 </style>
