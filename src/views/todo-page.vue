@@ -1,4 +1,5 @@
 <template>
+  <el-scrollbar>
     <div class="common-layout">
       <el-container>
 
@@ -19,6 +20,7 @@
         </el-container>
       </el-container>
     </div>
+  </el-scrollbar>
 </template>
 
 <script>
