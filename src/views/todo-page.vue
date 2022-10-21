@@ -8,11 +8,11 @@
 
         <el-container>
 
-          <el-aside width="200px">
+          <el-aside id="aside" width="300px">
             <todoListContainer/>
           </el-aside>
 
-          <el-main>
+          <el-main id="main">
             <todoItemContainer/>
           </el-main>
 
@@ -52,5 +52,9 @@ export default {
 <style scoped>
   #header {
     padding: 0;
+    border-bottom: solid 1px var(--el-menu-border-color)
+  }
+  #aside {
+    margin-top: 20px;
   }
 </style>

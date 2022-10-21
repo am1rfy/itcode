@@ -1,14 +1,22 @@
 <template>
-  <li class="list-group-item"
-      :class="{selected: isActive}"
+  <el-menu-item
       @click="$emit('changeActiveTodoList', title)"
-  >{{ title }}</li>
+      :index="index"
+  >
+    <el-icon>
+      <ArrowRight />
+    </el-icon>
+    <template #title>
+      {{ title }}
+    </template>
+  </el-menu-item>
 </template>
 
 <script>
 export default {
   name: 'todoList',
   props: {
+    index: String,
     title: String,
     isActive: Boolean
   },
@@ -16,20 +24,4 @@ export default {
 </script>
 
 <style scoped>
-  .list-group-item {
-    padding: 25px;
-    border: none;
-
-    background-color: var(--bs-body-color);
-    color: white;
-
-    font-weight: bolder;
-    cursor: pointer;
-  }
-  .list-group-item:hover {
-    background-color: var(--bs-gray-800);
-  }
-  .selected {
-    color: var(--bs-warning);
-  }
 </style>
