@@ -1,5 +1,11 @@
-import { customAxios } from '@/services/plugins/axiosPlugin'
-import { token } from '@/services/config'
+import axios from 'axios'
+
+import { token } from './config.js'
+import { baseURL } from './config.js'
+
+const instance = axios.create({
+    baseURL: baseURL
+})
 
 export default ({
     url = '/',
@@ -12,7 +18,7 @@ export default ({
         headers.authorization = token
     }
 
-    return customAxios({
+    return instance({
         url,
         method,
         params,

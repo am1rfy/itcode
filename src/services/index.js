@@ -1,8 +1,11 @@
-import * as user from '@/services/api/user'
+import * as auth from './api/auth.js'
 
-import { setToken } from '@/services/config'
+import { setToken } from './config.js'
+
+import responseHandler from './response-handler.js'
 
 export {
-    user,
-    setToken
+    auth,
+    setToken,
+    responseHandler
 }

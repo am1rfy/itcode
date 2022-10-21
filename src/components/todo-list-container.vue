@@ -1,7 +1,7 @@
 <template>
   <div class="todo-lists-bar">
     <ul class="list-group">
-      <TodoList
+      <todoList
           v-for="item in todoLists"
           :key="item.title"
           :title="item.title"
@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import TodoList from '@/components/TodoList/TodoList'
-import { useTodoListStore } from '@/stores/todoListStore'
+import todoList from '../components/todo-list.vue'
+import { useTodoListStore } from '../stores/todo-list-store.js'
 
 export default {
-  name: 'TodoListContainer',
+  name: 'todoListContainer',
   components: {
-    TodoList
+    todoList
   },
   data() {
     return {

@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'LinkComponent',
+  name: 'authLink',
   props: {
     url: String,
     text: String

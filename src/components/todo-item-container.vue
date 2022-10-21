@@ -1,7 +1,7 @@
 <template>
   <div class="cards-container" :style="activeTodoItemsExist">
     <template v-if="activeTodoItems.length !== 0">
-      <TodoItem
+      <todoItem
         v-for="item in activeTodoItems"
         :key="item.id"
         :id="item.id"
@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import TodoItem from '@/components/TodoItem/TodoItem'
-import { useTodoItemStore } from '@/stores/todoItemStore'
+import todoItem from '../components/todo-item.vue'
+import { useTodoItemStore } from '../stores/todo-item-store.js'
 
 export default {
-  name: 'TodoItemContainer',
+  name: 'todoItemContainer',
   components: {
-    TodoItem
+    todoItem
   },
   data() {
     return {

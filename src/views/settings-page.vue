@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'SettingsPage'
+  name: 'settingsPage'
 }
 </script>
 
@@ -15,6 +15,5 @@ export default {
   * {
     display: flex;
     justify-content: center;
-    color: white;
   }
 </style>

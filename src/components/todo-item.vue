@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'TodoItem',
+  name: 'todoItem',
   props: {
     id: Number,
     title: String,
@@ -28,34 +28,5 @@ export default {
 </script>
 
 <style scoped>
-  .card {
-    flex: 0 1 25%;
-    margin: 0 16px 16px 16px;
 
-    height: fit-content;
-    width: fit-content;
-
-    border-color: var(--bs-gray-600);
-    color: white;
-  }
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    border-color: var(--bs-gray-600);
-  }
-  .card-header > * {
-    margin: 0;
-  }
-  .card-header > p {
-    font-size: 1.1rem;
-    font-weight: 500;
-  }
-  .card-header,
-  .card-title,
-  .card-text {
-    cursor: default;
-  }
-  .btn {
-    padding: 0
-  }
 </style>

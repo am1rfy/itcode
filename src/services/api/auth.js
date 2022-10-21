@@ -1,7 +1,7 @@
-import makeRequest from '@/services/makeRequest'
+import makeRequest from '../http-client.js'
 
-const login = ({username, password}) => {
-    return makeRequest({
+const login = ({username, password}) =>
+    makeRequest({
         url: '/user/login/',
         method: 'post',
         data: {
@@ -9,10 +9,10 @@ const login = ({username, password}) => {
             password
         }
     })
-}
 
-const register = ({username, password}) => {
-    return makeRequest({
+
+const register = ({username, password}) =>
+    makeRequest({
         url: '/user/register/',
         method: 'post',
         data: {
@@ -20,7 +20,7 @@ const register = ({username, password}) => {
             password
         }
     })
-}
+
 
 export {
     login,

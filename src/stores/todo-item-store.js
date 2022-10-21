@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useTodoListStore } from '@/stores/todoListStore'
+import { useTodoListStore } from './todo-list-store.js'
 
 export const useTodoItemStore = defineStore('todoItems', {
     state() {

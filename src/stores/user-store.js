@@ -1,12 +1,11 @@
 import { defineStore } from 'pinia'
-import { user, setToken } from '@/services/index'
-import { responseHandler } from '@/services/responseHandler'
+import { auth, setToken, responseHandler} from '../services/index.js'
 
 export const useUserStore = defineStore('user', {
     actions: {
         async handleLogin(username, password) {
             try {
-                const resp = await user.login({username, password})
+                const resp = await auth.login({username, password})
                 return saveToken(resp)
             }
             catch (err) {
@@ -15,12 +14,15 @@ export const useUserStore = defineStore('user', {
         },
         async handleRegister(username, password) {
             try {
-                const resp = await user.register({username, password})
+                const resp = await auth.register({username, password})
                 return saveToken(resp)
             }
             catch (err) {
                 return {isSuccess: false, msg: err.message}
             }
+        },
+        handleLogout() {
+            setToken(undefined)
         }
     }
 })

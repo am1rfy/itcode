@@ -7,14 +7,14 @@ const routes = [
         meta: {
             title: 'Notes'
         },
-        component: () => import('@/views/TodoPage')
+        component: () => import('../views/todo-page.vue')
     },
     {
         path: '/tags/:activeTodoListName',
         meta: {
             title: 'Notes'
         },
-        component: () => import('@/views/TodoPage'),
+        component: () => import('../views/todo-page.vue'),
         props: true
     },
     {
@@ -23,7 +23,7 @@ const routes = [
         meta: {
             title: 'Sign in'
         },
-        component: () => import('@/views/LoginPage')
+        component: () => import('../views/login-page.vue')
     },
     {
         path: '/sign-up',
@@ -31,7 +31,7 @@ const routes = [
         meta: {
             title: 'Sign up'
         },
-        component: () => import('@/views/RegisterPage')
+        component: () => import('../views/register-page.vue')
     },
     {
         path: '/settings/',
@@ -39,7 +39,7 @@ const routes = [
         meta: {
             title: 'Settings'
         },
-        component: () => import ('@/views/SettingsPage')
+        component: () => import ('../views/settings-page.vue')
     },
     {
         path: '/:pathMatch(.*)*',
@@ -47,7 +47,7 @@ const routes = [
         meta: {
             title: 'Not found'
         },
-        component: () => import('@/views/NotFoundPage')
+        component: () => import('../views/not-found-page.vue')
     }
 ]
 

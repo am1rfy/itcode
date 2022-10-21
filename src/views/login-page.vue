@@ -1,5 +1,4 @@
 <template>
-
   <div class="common-layout">
     <el-container>
 
@@ -8,7 +7,7 @@
           <el-icon size="30px">
             <UserFilled/>
           </el-icon>
-          <p id="title">Sign up</p>
+          <p id="title">Sign in</p>
         </div>
       </el-header>
 
@@ -22,12 +21,12 @@
               show-icon
               center
           />
-          <AuthForm
-            @onSubmit="register"
+          <authForm
+              @onSubmit="login"
           />
-          <LinkComponent
-              :url="'/sign-in'"
-              :text="'Already have an account'"
+          <authLink
+              :url="'/sign-up'"
+              :text="'No account yet'"
           />
         </div>
       </el-main>
@@ -37,15 +36,15 @@
 </template>
 
 <script>
-import AuthForm from '@/components/AuthForm'
-import LinkComponent from '@/components/UI/LinkComponent'
-import { useUserStore } from '@/stores/userStore'
+import authLink from '../components/auth-link.vue'
+import authForm from '../components/auth-form.vue'
+import { useUserStore } from '../stores/user-store.js'
 
 export default {
-  name: 'RegisterPage',
+  name: 'loginPage',
   components: {
-    AuthForm,
-    LinkComponent
+    authForm,
+    authLink
   },
   data() {
     return {
@@ -54,14 +53,12 @@ export default {
     }
   },
   methods: {
-    async register(username, password) {
-      const {isSuccess, msg} = await this.userStore.handleRegister(username, password)
-
+    async login(username, password) {
+      const {isSuccess, msg} = await this.userStore.handleLogin(username, password)
       // TODO: убрать
       console.log(isSuccess, msg)
-
       if (isSuccess)
-        this.$router.push('/')
+        this.$router.push(`/`)
       else
         this.errorMsg = msg
     }
@@ -87,7 +84,6 @@ export default {
   #title {
     font-size: 30px;
     font-weight: bolder;
-
     margin-left: 5px;
   }
   .alert {
